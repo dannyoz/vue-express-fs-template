@@ -7,11 +7,30 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
+import HelloWorld from "@/components/HelloWorld.vue";
+import Service from "../services/service";
 
 @Options({
   components: {
     HelloWorld,
+  },
+  data() {
+    return {
+      info: {},
+    };
+  },
+  created() {
+    this.getData(); // NEW - call getEventData() when the instance is created
+  },
+  methods: {
+    async getData() {
+      Service.getData().then(
+        ((info: unknown) => {
+          console.log(info);
+          this.$set(this, "info", info);
+        }).bind(this)
+      );
+    },
   },
 })
 export default class HomeView extends Vue {}
