@@ -19,3 +19,5 @@ app.listen(app.get("port"), () => {
   // tslint:disable-next-line
   console.log("Express api is running on port", app.get("port"));
 });
+
+export const server = app;
